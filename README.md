@@ -1,7 +1,7 @@
 # subdivision - A tool to help manage your media files
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)\
 [![Generic badge](https://img.shields.io/badge/Build-Passing-Green.svg)](https://shields.io/)\
-[![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/fold_left.svg?style=social&label=Follow%20%40fold_left)](https://twitter.com/stevezaluk)
+[![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/fold_left.svg?style=social&label=Follow%20%40zbduid12)](https://twitter.com/stevezaluk)
 
 A file renaming, formatting, and moving tool with media servers in mind. Works Great with Plex
 
@@ -38,6 +38,18 @@ chmod +x subdivison3.py
     --full-match : Fully match file regex(s) instead of searching for them
 ```
 
+## Prefixes
+self.prefix can either be a regular string or it can be season+episode. Setting the prefix field to
+season+episode will search for a S#E# variant and rename the file to that tag if found. This makes it
+easy to quickly format files for plex/emby. I would love to add the title of the episode to the end
+of the file name to but that would be a bitch to automate.
+
+## Regexes
+self.folder_regex or self.file_regex can either be a list of regex's or a string. If a list is used
+then it will iterate through the list and if a item name matches ONE of the regular expressions then it
+will pass the direectories/files to the next stage. On a side note, self.file_regex uses r.search()
+instead of r.match(). This makes it easy to search for S#E# tags. If you would like to do a full match, please add the ```--full-match``` argument in your command. I plan to add options in the future to match all the regex's in a list instead of just one.
+
 # Development
 
 ## Known Issues
@@ -52,4 +64,3 @@ chmod +x subdivison3.py
 * Suffix options (put text at the end of the filename)
 * Center text options (put text at the end of the filename)
 * Chmod, Move, and Delete options
-*
