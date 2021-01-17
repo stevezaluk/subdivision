@@ -1,0 +1,5 @@
+IMDbPy
+psutil
+pymediainfo
+colorama
+pymongo
