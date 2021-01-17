@@ -39,7 +39,7 @@ def usage():
     print('     --file-regex [regex] : Use only files that match the regex')
     print('     --folder-regex [regex] : Use only folders that match the regex')
     print('     --prefix [prefix] : Set a prefix for your file name. Use --preserve-original-filname to use both')
-    print('     --preserve-original-filename : Put the original file name in the ')
+    print('     --preserve-original-filename : Put the original file name in the newly formatted file name')
     print('     --topdown : Walk the directory from the top down')
     print('')
 
