@@ -15,7 +15,7 @@ from sprint import Walk, WalkOptions, File
 # file does not exist error. I believe this is due to the way that the File object scans for metadata
 
 # Future Features:
-# full matching
+# full matching (done)
 # match all regex's present : Match all regular expressions in a list (if one is present) instead of just one
 # suffix options
 # center text option
@@ -41,6 +41,7 @@ def usage():
     print('     --prefix [prefix] : Set a prefix for your file name. Use --preserve-original-filname to use both')
     print('     --preserve-original-filename : Put the original file name in the newly formatted file name')
     print('     --topdown : Walk the directory from the top down')
+    print('     --full-match : Fully match file regex(s) instead of searching for them')
     print('')
 
 parser = argparse.ArgumentParser()
@@ -53,6 +54,7 @@ parser.add_argument('--folder-regex', action='store', dest='folder_regex', nargs
 parser.add_argument('--prefix', action='store', dest='prefix')
 parser.add_argument('--preserve-original-filename', action='store_true', dest='pof')
 parser.add_argument('--topdown', action='store_true', dest='topdown')
+parser.add_argument('--full-match', action='store_true', dest='full_match')
 
 options = WalkOptions(verbose=True)
 if __name__ == "__main__":
@@ -78,6 +80,9 @@ if __name__ == "__main__":
 
         if args.topdown:
             options.set_topdown(True)
+
+        if args.full_match:
+            options.set_full_match(True)
 
         if args.walk:
             options.print_options()

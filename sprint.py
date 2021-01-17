@@ -30,7 +30,7 @@ home = os.getenv("HOME")
 """
 class WalkOptions(object):
     def __init__(self, verbose=None, topdown=None, extensions=None, use_regex=False,
-                    file_regex=None, folder_regex=None, use_format=False,
+                    file_regex=None, folder_regex=None, full_match=False, use_format=False,
                     dry_run=None, prefix=None, embed_title=None, preserve_original_filename=None):
         self.verbose = verbose
         self.topdown = topdown
@@ -38,6 +38,7 @@ class WalkOptions(object):
         self.use_regex = use_regex
         self.file_regex = file_regex
         self.folder_regex = folder_regex
+        self.full_match = full_match
         self.use_format = use_format
         self.dry_run = dry_run
         self.prefix = prefix
@@ -93,6 +94,16 @@ class WalkOptions(object):
 
     def get_folder_regex(self):
         return self.folder_regex
+
+    def set_full_match(self, fm):
+        if isinstance(v, bool):
+            self.full_match = fm
+        else:
+            print('[sprint][ERROR]: "full_match" must be a boolean')
+            sys.exit(0)
+
+    def get_full_match(self):
+        return self.verbose
 
     def set_rename(self, r):
         if isinstance(r, bool):
@@ -368,7 +379,11 @@ class Walk(object):
                 total_file_count = total_file_count + 1
                 if isinstance(self.options.file_regex, str):
                     file_regex = re.compile(self.options.file_regex)
-                    file_regex_match = file_regex.search(name)
+                    if self.options.full_match:
+                        file_regex_match = file_regex.match(name)
+                    else:
+                        file_regex_match = file_regex.search(name)
+
                     if file_regex_match:
                         matched_file_count = matched_file_count + 1
                         file_path = root + '/' + d + '/' + name
@@ -379,7 +394,10 @@ class Walk(object):
                 elif isinstance(self.options.file_regex, list):
                     for regx in self.options.file_regex:
                         file_regex = re.compile(regx)
-                        file_regex_match = file_regex.search(name)
+                        if self.options.full_match:
+                            file_regex_match = file_regex.match(name)
+                        else:
+                            file_regex_match = file_regex.search(name)
                         if file_regex_match:
                             matched_file_count = matched_file_count + 1
                             file_path = root + '/' + d + '/' + name
