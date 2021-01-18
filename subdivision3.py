@@ -55,6 +55,7 @@ parser.add_argument('--prefix', action='store', dest='prefix')
 parser.add_argument('--preserve-original-filename', action='store_true', dest='pof')
 parser.add_argument('--topdown', action='store_true', dest='topdown')
 parser.add_argument('--full-match', action='store_true', dest='full_match')
+parser.add_argument('--test', action='store_true', dest='test')
 
 options = WalkOptions(verbose=True)
 if __name__ == "__main__":
@@ -83,6 +84,9 @@ if __name__ == "__main__":
 
         if args.full_match:
             options.set_full_match(True)
+
+        if args.test:
+            print('[subdivision3]: Test Code')
 
         if args.walk:
             options.print_options()
