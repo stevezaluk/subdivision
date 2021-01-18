@@ -103,7 +103,7 @@ class WalkOptions(object):
             sys.exit(0)
 
     def get_full_match(self):
-        return self.verbose
+        return self.full_match
 
     def set_rename(self, r):
         if isinstance(r, bool):
@@ -164,6 +164,7 @@ class WalkOptions(object):
         print(' Top Down: ', self.get_topdown())
         print(' File Regex: ', self.get_file_regex())
         print(' Folder Regex: ', self.get_folder_regex())
+        print(' Full Match: ', self.get_full_match())
         # print(' Perscribed Extensions: ', self.get_extensions())
         print('\n[*] Format Options: ')
         print(' Dry Run: ', self.get_dry_run())
@@ -302,6 +303,19 @@ class Walk(object):
     def vprint(self, text):
         if self.options.verbose:
             print(text)
+
+    @classmethod
+    def remove_file_name_from_abspath(absolute_path):
+        path_list = absolute_file_path.split('/')
+        path_list.pop(-1)
+        full_path = '/Users'
+        for element in path_list:
+            if element == '' or '' == element:
+                path_list.remove('')
+            full_path = full_path + element + '/'
+        full_path = full_path + file_name
+
+        return full_path
 
     def walk(self):
         total_dir_count = 0
@@ -456,37 +470,10 @@ class Walk(object):
             file_name = file_name + ext
             if self.options.dry_run:
                 format_count = format_count + 1
-                absolute_file_path = f.absolute_path
-                path_list = absolute_file_path.split('/')
-                path_list.pop(-1)
-                full_path = '/Users'
-                for element in path_list:
-                    if element == '' or '' == element:
-                        path_list.remove('')
-                    full_path = full_path + element + '/'
-                full_path = full_path + file_name
+                full_path = self.remove_file_name_from_abspath(f.absolute_path)
                 self.vprint('[sprint][FORMAT]: {ofn} --> {nfn}'.format(ofn=f.file_name, nfn=full_path))
             else:
-                absolute_file_path = f.absolute_path
-                path_list = absolute_file_path.split('/')
-                path_list.pop(-1)
-                full_path = '/Users'
-                for element in path_list:
-                    if element == '' or '' == element:
-                        path_list.remove('')
-                    full_path = full_path + element + '/'
-                full_path = full_path + file_name
+                full_path = self.remove_file_name_from_abspath(f.absolute_path)
                 format_count = format_count + 1
                 f.chmod(0o100777) # add option for this
                 f.rename(full_path)
-
-if __name__ == '__main__':
-    # o = WalkOptions()
-    # o.set_verbose(True)
-    # o.set_dry_run(True)
-    # o.set_folder_regex(r'season(\d+)')
-    # o.set_prefix('season+episode')
-    # w = Walk('/Users/szaluk/media_for_vault/HOW_I_MET_YOUR_MOTHER', o)
-    # w.walk()
-    f = File('~/Desktop/HOME_ALONE.mkv')
-    f.print_info()
