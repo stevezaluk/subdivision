@@ -67,7 +67,7 @@ instead of r.match(). This makes it easy to search for S#E# tags. If you would l
 * file does not exist error. I believe this is due to the way that the File object scans for metadata
 
 ## Future Features
-* Full matching instead of searching for regex's during file scan
+* Full matching instead of searching for regex's during file scan [DONE] 
 * Match all regex's present : If a list of regex's is given, match all of them instead of just one
 * Suffix options (put text at the end of the filename)
 * Center text options (put text at the end of the filename)
