@@ -30,6 +30,7 @@ chmod +x subdivison3.py
     -w [directory] : Do a directory walk
 
   Walk Options:
+    -j, --json : Use a json file instead of command line arguments
     --dry-run : Do everything except formatting
     --file-regex [regex] : Use only files that match this regex
     --folder-regex [regex] : Use only directories that match this regex
