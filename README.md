@@ -35,8 +35,14 @@ chmod +x subdivison3.py
     --folder-regex [regex] : Use only directories that match this regex
     --prefix : Set a prefix for your filename. Use --preserve-original-filename to put the original name at the end. Otherwise this will rename it to your prefix
     --preserve-original-filename : Put the original file name in the newly formatted file name
-    --topdown : Walk the directory from the top down
+    --top-down : Walk the directory from the top down
     --full-match : Fully match file regex(s) instead of searching for them
+```
+
+## Common Uses
+* To format a tv show to have S#E# file names then you can use the following command:
+```
+python3 subdivision3 -w [directory] --top-down --folder-regex "season(\\d+)" --file-regex "(S[0-9])(E[0-9])" "(S[0-9])\\S(E[0-9])\\S" "(s[0-9])(e[0-9])" "(s\\d[0-9])(e\\d[0-9])" --prefix season+episode
 ```
 
 ## Prefixes

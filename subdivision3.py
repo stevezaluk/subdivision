@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 import os, sys, argparse
-from sprint import Walk, WalkOptions, File
+sys.path.insert(1, '/Users/szaluk/lab/projects/vault_suite/subdivision')
+from sprint.walk import Walk
+from sprint.options import WalkOptions
+from sprint.file import File
 
 # Known Issues:
 # Some times while scanning for files sprint throws a FileNotFoundError due to incorrect path parsing
@@ -48,12 +51,13 @@ parser = argparse.ArgumentParser()
 parser.add_argument('item')
 parser.add_argument('-i', '--info', action='store_true', dest='info')
 parser.add_argument('-w', '--walk', action='store_true', dest='walk')
+parser.add_argument('-j', '--json', action='store', dest='json')
 parser.add_argument('--dry-run', action='store_true', dest='dry_run')
 parser.add_argument('--file-regex', action='store', dest='file_regex', nargs='*')
 parser.add_argument('--folder-regex', action='store', dest='folder_regex', nargs='*')
 parser.add_argument('--prefix', action='store', dest='prefix')
 parser.add_argument('--preserve-original-filename', action='store_true', dest='pof')
-parser.add_argument('--topdown', action='store_true', dest='topdown')
+parser.add_argument('--top-down', action='store_true', dest='topdown')
 parser.add_argument('--full-match', action='store_true', dest='full_match')
 parser.add_argument('--test', action='store_true', dest='test')
 
@@ -84,6 +88,10 @@ if __name__ == "__main__":
 
         if args.full_match:
             options.set_full_match(True)
+
+        if args.json:
+            options.set_json(args.json)
+            options.parse_json_options()
 
         if args.test:
             print('[subdivision3]: Test Code')
