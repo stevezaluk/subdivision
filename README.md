@@ -2,9 +2,7 @@
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)\
 A file renaming, formatting, and moving tool with media servers in mind. Works Great with Plex
 
-[![Generic badge](https://img.shields.io/badge/Build-Passing-Green.svg)](https://shields.io/)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://bitbucket.org/lbesson/ansi-colors)\
-[![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/fold_left.svg?style=social&label=Follow%20%40zbduid12)](https://twitter.com/stevezaluk)
+(https://twitter.com/stevezaluk)
 
 # Installation
 
